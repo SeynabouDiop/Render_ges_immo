@@ -19,7 +19,8 @@ app.use(cors({
   origin: [
     'http://localhost:4200',
     'http://127.0.0.1:4200',
-    'http://localhost:3000'
+    'http://localhost:3000',
+    'https://vercel-ges-immo.vercel.app/'
   ],
   credentials: true,
   methods: [
