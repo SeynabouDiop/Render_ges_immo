@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exposition Numérique Salla Marie | Musée de la Ville</title>
+    <style>
+        /* Variables CSS pour maintenir la cohérence */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --light-text: #fff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        /* Styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+        }
+        
+        /* Structure de la page */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* En-tête avec navigation */
+        header {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: 1.5rem;
+        }
+        
+        nav a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--secondary-color);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Section principale avec image */
+        .hero {
+            position: relative;
+            height: 70vh;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--light-text);
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Section description */
+        .description {
+            padding: 4rem 0;
+            background-color: white;
+        }
+        
+        .description-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 3rem;
+        }
+        
+        .description-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .description h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .description p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .description-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .description-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+        
+        .description-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Bouton interactif */
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Section artistes */
+        .artists {
+            padding: 4rem 0;
+            background-color: var(--light-color);
+        }
+        
+        .artists h3 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+        
+        .artists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .artist-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .artist-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .artist-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .artist-info {
+            padding: 1.5rem;
+        }
+        
+        .artist-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .artist-bio {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Pied de page */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+        
+        .footer-section p, .footer-section a {
+            margin-bottom: 0.8rem;
+            display: block;
+            color: var(--light-text);
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: 1rem;
+            }
+            
+            nav ul {
+                justify-content: center;
+            }
+            
+            nav li {
+                margin: 0 0.75rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête avec navigation -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <!-- Logo du musée (à remplacer par le vrai logo) -->
+                    <img src="téléchargement.png" alt="Logo du Musée">
+                    <h1>Musée de la Ville</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#accueil">Accueil</a></li>
+                        <li><a href="#exposition">Exposition</a></li>
+                        <li><a href="#artistes">Artistes</a></li>
+                        <li><a href="#infos">Infos pratiques</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section principale avec image -->
+    <section class="hero" id="accueil">
+        <!-- Image principale de l'exposition (à remplacer par l'image réelle) -->
+        <img src="téléchargement.jpg" alt="Exposition Numérique Salla Marie" class="hero-image">
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <h2>Exposition Numérique Salla Marie</h2>
+                <p>Une immersion dans l'art numérique contemporain</p>
+                <a href="#artistes" class="btn">Voir les artistes</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section description -->
+    <section class="description" id="exposition">
+        <div class="container">
+            <div class="description-content">
+                <div class="description-text">
+                    <h3>L'exposition Salla Marie</h3>
+                    <p>Découvrez une expérience immersive unique qui redéfinit les frontières entre l'art et la technologie. L'exposition Salla Marie présente des œuvres numériques innovantes qui dialoguent avec l'espace et le spectateur.</p>
+                    <p>À travers des installations interactives, des projections mapping et des expériences de réalité augmentée, les artistes explorent de nouvelles formes d'expression artistique qui questionnent notre rapport au numérique.</p>
+                    <p>Cette exposition est le fruit d'une collaboration entre le musée et des artistes émergents de la scène numérique internationale.</p>
+                    <a href="#infos" class="btn">Informations pratiques</a>
+                </div>
+                <div class="description-image">
+                    <!-- Image secondaire (à remplacer par l'image réelle) -->
+                    <img src="téléchargement.jpg" alt="Installation interactive">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section artistes -->
+    <section class="artists" id="artistes">
+        <div class="container">
+            <h3>Les artistes</h3>
+            <div class="artists-grid">
+                <!-- Artiste 1 -->
+                <div class="artist-card">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMDAgMzAwIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzJlYzNmNCIvPjxjaXJjbGUgY3g9IjE1MCIgY3k9IjEwMCIgcj0iNTAiIGZpbGw9IiMzNDk4ZGIiLz48cmVjdCB4PSIxMDAiIHk9IjE3MCIgd2lkdGg9IjEwMCIgaGVpZ2h0PSI4MCIgZmlsbD0iIzM0OThkYiIvPjwvc3ZnPg==" alt="Lena Dubois" class="artist-image">
+                    <div class="artist-info">
+                        <h4 class="artist-name">Lena Dubois</h4>
+                        <p class="artist-bio">Artiste numérique française spécialisée dans les installations interactives et la réalité augmentée.</p>
+                    </div>
+                </div>
+                
+                <!-- Artiste 2 -->
+                <div class="artist-card">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMDAgMzAwIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2ViNGY1YiIvPjxjaXJjbGUgY3g9IjE1MCIgY3k9IjEwMCIgcj0iNTAiIGZpbGw9IiNlYjRmNWIiLz48cmVjdCB4PSIxMDAiIHk9IjE3MCIgd2lkdGg9IjEwMCIgaGVpZ2h0PSI4MCIgZmlsbD0iI2ViNGY1YiIvPjwvc3ZnPg==" alt="Marco Silva" class="artist-image">
+                    <div class="artist-info">
+                        <h4 class="artist-name">Marco Silva</h4>
+                        <p class="artist-bio">Designer brésilien explorant les intersections entre l'art génératif et les données en temps réel.</p>
+                    </div>
+                </div>
+                
+                <!-- Artiste 3 -->
+                <div class="artist-card">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMDAgMzAwIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2YxYzQwNiIvPjxjaXJjbGUgY3g9IjE1MCIgY3k9IjEwMCIgcj0iNTAiIGZpbGw9IiNmMWM0MDYiLz48cmVjdCB4PSIxMDAiIHk9IjE3MCIgd2lkdGg9IjEwMCIgaGVpZ2h0PSI4MCIgZmlsbD0iI2YxYzQwNiIvPjwvc3ZnPg==" alt="Yuki Tanaka" class="artist-image">
+                    <div class="artist-info">
+                        <h4 class="artist-name">Yuki Tanaka</h4>
+                        <p class="artist-bio">Artiste japonaise fusionnant techniques traditionnelles et technologies numériques contemporaines.</p>
+                    </div>
+                </div>
+                
+                <!-- Artiste 4 -->
+                <div class="artist-card">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMDAgMzAwIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzFlYmM1NCIvPjxjaXJjbGUgY3g9IjE1MCIgY3k9IjEwMCIgcj0iNTAiIGZpbGw9IiMxZWJjNTQiLz48cmVjdCB4PSIxMDAiIHk9IjE3MCIgd2lkdGg9IjEwMCIgaGVpZ2h0PSI4MCIgZmlsbD0iIzFlYmM1NCIvPjwvc3ZnPg==" alt="Amina Johnson" class="artist-image">
+                    <div class="artist-info">
+                        <h4 class="artist-name">Amina Johnson</h4>
+                        <p class="artist-bio">Artiste américaine créant des expériences immersives qui questionnent l'identité numérique.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer id="infos">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Informations pratiques</h4>
+                    <p><strong>Dates :</strong> 15 octobre - 15 décembre 2023</p>
+                    <p><strong>Horaires :</strong> 10h - 18h (fermé le lundi)</p>
+                    <p><strong>Tarifs :</strong> 12€ plein tarif, 8€ tarif réduit</p>
+                    <p><strong>Adresse :</strong> Musée de la Ville, 123 Avenue des Arts</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email : info@museedelaville.fr</p>
+                    <p>Téléphone : 01 23 45 67 89</p>
+                    <p>Réservations groupes : groupes@museedelaville.fr</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Suivez-nous</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">FB</a>
+                        <a href="#" aria-label="Instagram">IG</a>
+                        <a href="#" aria-label="Twitter">TW</a>
+                        <a href="#" aria-label="YouTube">YT</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Musée de la Ville - Tous droits réservés</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const artistButton = document.querySelector('a[href="#artistes"]');
+            
+            artistButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80, 
+                    behavior: 'smooth'
+                });
+            });
+            
+            
+            const artistCards = document.querySelectorAll('.artist-card');
+            
+            function checkScroll() {
+                artistCards.forEach(card => {
+                    const cardTop = card.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (cardTop < windowHeight - 100) {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }
+                });
+            }
+            
+            
+            artistCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+            
+            window.addEventListener('scroll', checkScroll);
+            window.addEventListener('load', checkScroll);
+        });
+    </script>
+</body>
+</html>
