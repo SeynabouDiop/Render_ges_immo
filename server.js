@@ -163,30 +163,31 @@ try {
 }
 
 // =============================================
-// GESTION DES ERREURS
+// GESTION DES ERREURS - CORRECTION ICI !
 // =============================================
 
-// Route 404 - Capture toutes les routes non trouvées
-app.use('*', (req, res) => {
-  console.log(`❌ Route non trouvée: ${req.originalUrl}`);
+// CORRECTION : Route 404 - Utilisez un chemin explicite au lieu de '*'
+app.use((req, res, next) => {
+  // Si aucune route n'a matché, c'est une 404
+  console.log(`❌ Route non trouvée: ${req.method} ${req.originalUrl}`);
   res.status(404).json({
     success: false,
     message: 'Route non trouvée',
     path: req.originalUrl,
     method: req.method,
     availableEndpoints: [
-      '/api/health',
-      '/api/auth/login',
-      '/api/auth/register',
-      '/api/clients',
-      '/api/proprietaires'
+      'GET /api/health',
+      'POST /api/auth/login',
+      'POST /api/auth/register',
+      'GET /api/clients',
+      'GET /api/proprietaires'
     ]
   });
 });
 
 // Gestionnaire d'erreurs global
 app.use((err, req, res, next) => {
-  console.error('❌ Server Error:', err.stack);
+  console.error('❌ Server Error:', err.message);
   
   // Erreur CORS
   if (err.message.includes('CORS')) {
