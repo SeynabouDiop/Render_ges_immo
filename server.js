@@ -18,8 +18,7 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:4200',
-    'http://127.0.0.1:4200',
-    'http://localhost:3000',
+    'https://frontend-psi-eight-73.vercel.app/',
     'https://frontend-psi-eight-73.vercel.app/'
   ],
   credentials: true,
