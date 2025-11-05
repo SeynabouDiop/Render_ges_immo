@@ -14,12 +14,13 @@ connectDB();
 
 const app = express();
 
-// CORS complet
+// CORS complet - CORRECTION ICI
 app.use(cors({
   origin: [
     'http://localhost:4200',
-    'https://frontend-psi-eight-73.vercel.app/',
-    'https://frontend-psi-eight-73.vercel.app/'
+    'http://127.0.0.1:4200',
+    'https://frontend-psi-eight-73.vercel.app', // SANS le slash final !
+    'https://frontend-psi-eight-73.vercel.app'  // Enlever le slash
   ],
   credentials: true,
   methods: [
@@ -54,7 +55,7 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// CORRECTION : Utiliser le même préfixe pour toutes les routes API
+// Routes API
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/clients', require('./routes/clients'));
 app.use('/api/proprietaires', require('./routes/proprietaires'));
@@ -73,8 +74,8 @@ app.get('/', (req, res) => {
   });
 });
 
-// Gestion des erreurs 404
-app.use('edr', (req, res) => {
+// CORRECTION : Gestion des erreurs 404 - "edr" → "/*"
+app.use('*', (req, res) => {  // CORRIGE ICI
   res.status(404).json({
     message: 'Route non trouvée',
     path: req.originalUrl
@@ -98,5 +99,5 @@ app.listen(PORT, () => {
   console.log(`📍 Port: ${PORT}`);
   console.log(`📍 URL: http://localhost:${PORT}`);
   console.log(`🔍 Health check: http://localhost:${PORT}/api/health`);
-  console.log(`🌐 CORS enabled for: http://localhost:4200\n`);
+  console.log(`🌐 CORS enabled for: https://frontend-psi-eight-73.vercel.app`);
 });
